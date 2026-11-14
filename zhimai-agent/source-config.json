@@ -1,0 +1,33 @@
+{
+  "source": "超星智能体管理后台，迁移时读取",
+  "agent_name": "知脉｜课程知识链路导航",
+  "dialog_model": "deepseek-v4-flash [阿里云百炼]",
+  "dialog_thinking": "开启，程度中",
+  "long_term_memory": {"enabled": true, "expiry_days": 7},
+  "system_variables": ["INNER_userId", "INNER_user_name", "INNER_learnId", "INNER_unitId", "INNER_robotId", "INNER_conversationId", "INNER_referer_url", "INNER_channel", "INNER_location", "INNER_lang"],
+  "enabled_skills_observed": ["文献传递回答", "问题澄清"],
+  "navigation_flow": {
+    "name": "梳理课程知识链路",
+    "knowledge_bases": ["知脉｜四年专业课知识点", "默认知识库"],
+    "search_strategy": "混合",
+    "max_recall": 10,
+    "minimum_match": 0.5,
+    "rerank_threshold": 0.3,
+    "model": "deepseek-v4-flash [阿里云百炼]",
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "repetition_penalty": 1.1,
+    "thinking": true
+  },
+  "exercise_flow": {
+    "name": "发现习题",
+    "model": "doubao-seed-2-0-lite-260428 [doubao]",
+    "rounds": 5,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "repetition_penalty": 1.1,
+    "thinking": false,
+    "stages": ["输入变量", "任务类型", "题型选择", "出题难度", "对话提示选择", "变量聚合", "生成轮次数组", "循环：出题、作答、判题、反馈、记录", "学习质量评估报告"]
+  },
+  "migration_note": "源平台使用混合检索和重排；本项目用本地关键词 BM25 检索近似实现，分数与原阈值不等价。各平台模型接口和多模态、语音等能力需要各自接入。"
+}

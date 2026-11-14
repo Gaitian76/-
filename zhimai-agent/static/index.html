@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>知脉｜课程知识链路导航</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">脉</span><div><strong>知脉</strong><small>课程知识链路导航</small></div></div>
+    <div id="status" class="status" role="status">正在检查知识库…</div>
+  </header>
+  <main class="shell">
+    <section class="intro">
+      <div><span class="eyebrow">让知识之间的关系更清晰</span><h1>把知识点连成学习路径</h1><p>围绕课程、章节和知识点提问，或通过练习检验理解。</p></div>
+      <div class="intro-badge"><span>知</span><span>识</span><span>链</span><span>路</span></div>
+    </section>
+    <nav class="tabs" aria-label="选择功能">
+      <button id="tab-chat" class="tab active" type="button" aria-selected="true">知识导航</button>
+      <button id="tab-quiz" class="tab" type="button" aria-selected="false">阶梯练习</button>
+    </nav>
+    <section id="chat-panel" class="panel">
+      <div class="panel-heading"><div><h2>知识导航</h2><p>基于已导入的资料梳理概念、前置基础和后续用途。</p></div><button id="clear-chat" class="text-button" type="button">清空对话</button></div>
+      <div id="messages" class="messages" aria-live="polite">
+        <div class="welcome"><div class="welcome-icon">✳</div><h3>你好，我是小脉</h3><p>你想从哪个知识点开始？</p><div class="suggestions"><button type="button">采样定理需要哪些前置知识？</button><button type="button">电路与传感器课程有什么联系？</button><button type="button">如何复习线性代数？</button></div></div>
+      </div>
+      <form id="chat-form" class="compose"><label class="sr-only" for="question">输入问题</label><textarea id="question" rows="2" maxlength="4000" placeholder="输入课程、章节或知识点，例如：采样定理的前置知识是什么？" required></textarea><div class="compose-footer"><span>内容以已导入的知识库为依据</span><button class="primary" type="submit">发送问题 <span>↗</span></button></div></form>
+    </section>
+    <section id="quiz-panel" class="panel" hidden>
+      <div class="panel-heading"><div><h2>阶梯练习</h2><p>设置学习目标，完成五轮练习并生成学习报告。</p></div></div>
+      <form id="quiz-config" class="quiz-config">
+        <label>任务名称<input name="task_name" maxlength="200" placeholder="例如：信号采样基础" required></label>
+        <label>核心问题<input name="core_question" maxlength="4000" placeholder="例如：理解采样定理及其应用" required></label>
+        <label>任务类型<select name="task_type"><option>阶梯闯关</option><option>主干生成</option></select></label>
+        <label>出题难度<select name="difficulty"><option>简单</option><option>较为简单</option><option selected>适中</option><option>较为困难</option><option>困难</option></select></label>
+        <fieldset><legend>题型（可多选）</legend><label><input type="checkbox" name="question_types" value="单选题" checked> 单选题</label><label><input type="checkbox" name="question_types" value="多选题"> 多选题</label><label><input type="checkbox" name="question_types" value="判断题"> 判断题</label></fieldset>
+        <label>对话提示<select name="hint"><option>开启</option><option>关闭</option></select></label>
+        <div class="wide"><button class="primary" type="submit">开始练习 <span>↗</span></button></div>
+      </form>
+      <div id="quiz-session" class="quiz-session" hidden>
+        <div class="quiz-meta"><span id="quiz-round" class="round"></span><button id="reset-quiz" class="text-button" type="button">重新设置</button></div>
+        <div id="quiz-log" class="quiz-log" aria-live="polite"></div>
+        <form id="answer-form" class="answer-form"><label for="student-answer">你的答案</label><textarea id="student-answer" rows="3" maxlength="2000" placeholder="输入你的答案" required></textarea><button class="primary" type="submit">提交答案 <span>↗</span></button></form>
+        <button id="next-question" class="primary" type="button" hidden>下一题 <span>→</span></button>
+        <button id="make-report" class="primary" type="button" hidden>生成学习报告 <span>↗</span></button>
+      </div>
+    </section>
+    <footer>回答由模型生成，请结合课程资料核对。</footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
